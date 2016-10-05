@@ -5,7 +5,7 @@ public class AlgorithmControl
 
 	public static void loop()
 	{
-		for	(int i = 0; i < 20; i++)
+		for (int i = 0; i < 20; i++)
 			System.out.println(i);
 	}
 
@@ -43,11 +43,13 @@ public class AlgorithmControl
 		decrement();
 		increment();
 
-		timer(10000,500);   // more loops per second
-		timer(10000,50000); // less loops per second
+		int n1 = timer(10000,500);   // more loops per second
+		int n2 = timer(10000,50000); // less loops per second
 		// Reasons:
 		// printing takes time
 		// branch prediction maybe?
+		System.out.println("Total loops (print every 500): " n1);
+		System.out.println("Total loops (print every 50000): " n2);
 	}
 
 }
