@@ -20,7 +20,7 @@ public class AlgorithmControl
 	{
 		// Note: I use 10.9 as the upper bound instead of 10.8 
 		// to avoid dealing with floating precision errors.
-		// i.e. `i` may reach 1.80000000001 and therefore not print 1.8
+		// i.e. `i` may reach 10.80000000001 and therefore not print 1.8
 		for (double i = 1.2; i < 10.9; i+=0.4)
 			System.out.println(i);
 	}
@@ -28,9 +28,10 @@ public class AlgorithmControl
 	public static int timer(long t, int n)
 	{
 		long t1 = System.currentTimeMillis();
+		long t2 = t1 + t;
 		for (int i = 0; ; i++)
 		{
-			if (System.currentTimeMillis() - t1 < t)
+			if (System.currentTimeMillis() < t2)
 				return i;
 			if (i % n == 0)
 				System.out.println(i);
