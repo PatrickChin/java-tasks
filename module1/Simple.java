@@ -2,8 +2,7 @@ package module1;
 
 public class Simple {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 
 		double doubVar = 20;
 		float floatVar = 20;

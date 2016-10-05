@@ -2,11 +2,9 @@ package module1;
 
 public class VectorMethods {
 
-	// No reason for these not to be static
-
-	public /*static*/ double dotProduct(double x, double y, double z, 
+	public /*static*/ double dotProduct(double x1, double y1, double z1, 
 			double x2, double y2, double z2) {
-		return x*x2 + y*y2 + z*z2;
+		return x1*x2 + y1*y2 + z1*z2;
 	}
 
 	public /*static*/ double magnitude(double x, double y, double z) {
@@ -22,8 +20,7 @@ public class VectorMethods {
 	}
 
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		VectorMethods vm = new VectorMethods();
 		vm.dotProduct(6,3,1,/**/2,4,2);
 		// vm.dotProduct(6,3,1,/**/0,0,0); // cannot divide by 0
