@@ -25,7 +25,7 @@ public class AlgorithmControl {
 		long t1 = System.currentTimeMillis();
 		long t2 = t1 + t;
 		for (int i = 0; ; i++) {
-			if (System.currentTimeMillis() < t2)
+			if (System.currentTimeMillis() >= t2)
 				return i;
 			if (i % n == 0)
 				System.out.println(i);
@@ -33,17 +33,23 @@ public class AlgorithmControl {
 	}
 
 	public static void main(String[] args) {
+
 		loop();
+		System.out.println();
+
 		decrement();
+		System.out.println();
+
 		increment();
+		System.out.println();
 
 		int n1 = timer(10000,500);   // more loops per second
 		int n2 = timer(10000,50000); // less loops per second
 		// Reasons:
 		// printing takes time
 		// branch prediction maybe?
-		System.out.println("Total loops (print every 500): " n1);
-		System.out.println("Total loops (print every 50000): " n2);
+		System.out.println("Total loops (print every 500): "+n1);
+		System.out.println("Total loops (print every 50000): "+n2);
 	}
 
 }
