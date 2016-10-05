@@ -1,5 +1,7 @@
 package module1;
 
+import java.math.BigDecimal;
+
 public class AlgorithmControl {
 
 	public static void loop() {
@@ -14,11 +16,19 @@ public class AlgorithmControl {
 	}
 
 	public static void increment() {
-		// Note: I use 10.9 as the upper bound instead of 10.8 
+
+		// Use 10.9 as the upper bound instead of 10.8 
 		// to avoid dealing with floating precision errors.
-		// i.e. `i` may reach 10.80000000001 and therefore not print 1.8
 		for (double i = 1.2; i < 10.9; i+=0.4)
 			System.out.println(i);
+
+		// To print actual numbers between 1.2 and 10.8 in
+		// steps of 0.4, use BigDecimal.
+		/* for (BigDecimal i = new BigDecimal("1.2");
+				i.compareTo(new BigDecimal("10.8")) < 0;
+				i = i.add(new BigDecimal("0.4")))
+			System.out.println(i);
+		*/
 	}
 
 	public static int timer(long t, int n) {
