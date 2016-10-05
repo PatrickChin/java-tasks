@@ -61,11 +61,18 @@ public class Simple {
 
 		int i = (int) 12.99;
 		System.out.println(i);
-		System.out.println("Explicit conversion from double to int");
+		System.out.println("Explicit conversion from double to int.\n"
+				   "Decimal digits are lost in conversion.");
 		System.out.println();
 
-		// Implicit narrowing not allowed
-		//int j = 123.32;
+		// Implicit conversion not allowed
+		//int k = 123.32;
+		
+		// `i+3.2` return a double
+		// Implicit conversion to int not allowed
+		// i = i + 3.2;
+		// Allowed here for some reason though
+		i += 3.2;
     }
 
 }
