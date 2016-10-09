@@ -1,6 +1,6 @@
 package module1;
 
-import java.math.BigDecimal;
+// import java.math.BigDecimal;
 
 public class AlgorithmControl {
 
@@ -17,17 +17,20 @@ public class AlgorithmControl {
 
 	public static void increment() {
 
-		// Use 10.9 as the upper bound instead of 10.8 
-		// to avoid dealing with floating precision errors.
-		for (double i = 1.2; i < 10.9; i+=0.4)
-			System.out.println(i);
+		// Floating point errors propogated every loop
+		//for (double i = 1.2; i <= 10.8; i+=0.4)
+		//	System.out.println(i);
 
-		// To print actual numbers between 1.2 and 10.8 in
-		// steps of 0.4, use BigDecimal.
-		/* for (BigDecimal i = new BigDecimal("1.2");
-				i.compareTo(new BigDecimal("10.8")) < 0;
-				i = i.add(new BigDecimal("0.4")))
-			System.out.println(i);
+		// More accurate
+		for (int i = 12; i <= 108; i+=4)
+			System.out.println(i/10.0);
+
+		/*
+		// BigDecimal can also be used for arbitrary precision decimals
+		for (BigDecimal d = new BigDecimal("1.2");
+				d.compareTo(new BigDecimal("10.8")) <= 0;
+				d = d.add(new BigDecimal("0.4")))
+			System.out.println(d);
 		*/
 	}
 
@@ -56,10 +59,11 @@ public class AlgorithmControl {
 		int n1 = timer(10000,500);   // more loops per second
 		int n2 = timer(10000,50000); // less loops per second
 		// Reasons:
-		// printing takes time
+		// writing to the console takes time
 		// branch prediction maybe?
 		System.out.println("Total loops (print every 500): "+n1);
 		System.out.println("Total loops (print every 50000): "+n2);
 	}
 
 }
+
