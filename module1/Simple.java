@@ -37,6 +37,9 @@ public class Simple {
 		System.out.println("ASCII table used when printing characters");
 		System.out.println();
 
+		// Error on lossy conversion from int to char
+		// char charVar2 = 'a' + 1000000;
+
 		// System.out.println();
 		// System.out.println("Type conversion documentation can be found here:");
 		// System.out.println("\thttp://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html");
@@ -49,7 +52,7 @@ public class Simple {
 		System.out.println("Implicit conversion of intVar to double");
 		System.out.println();
 
-		System.out.println("stringgg:" + intVar);
+		System.out.println("stringgg+" + intVar);
 		System.out.println("`Integer.toString` is called (probably?) to append integer to string");
 		System.out.println();
 
@@ -60,7 +63,7 @@ public class Simple {
 
 		int i = (int) 12.99;
 		System.out.println(i);
-		System.out.println("Explicit conversion from double to int.\n"
+		System.out.println("Explicit conversion from double to int.\n" +
 				   "Decimal digits are lost in conversion.");
 		System.out.println();
 
@@ -75,3 +78,4 @@ public class Simple {
     }
 
 }
+
