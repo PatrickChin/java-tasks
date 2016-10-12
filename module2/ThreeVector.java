@@ -113,11 +113,10 @@ public class ThreeVector {
 		return Math.acos(d / (m1 * m2));
 	}
 
-	// public String toString() {
-	// 	return String.format("%1$s[%2$.2f, %3$.2f, %4$.2f]",
-	// 			this.getClass().getName(),
-	// 			this.x, this.y, this.z);
-	// }
+	public String toString() {
+		return String.format("[%1$.2f, %2$.2f, %3$.2f]",
+				this.x, this.y, this.z);
+	}
 
 }
 

@@ -2,6 +2,9 @@ package module2;
 
 import module2.ThreeVector;
 
+/**
+ * Class containing tests for performing operation on ThreeVectors
+ */
 public class TestThreeVector {
 
 	public static void main(String[] args) {
@@ -36,7 +39,7 @@ public class TestThreeVector {
 		System.out.println();
 
 		System.out.println(v1);
-		System.out.println("Without a toString method, printing an object will"+
-				"print the class name of the object and it's hash code.");
+		System.out.println("Without a toString method, printing an object will "+
+				"display the class name of the object and it's hash code.");
 	}
 }
