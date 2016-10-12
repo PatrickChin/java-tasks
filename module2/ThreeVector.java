@@ -100,7 +100,8 @@ public class ThreeVector {
 	}
 
 	/**
-	 * Returns the angle between the vectors v1 and v2.
+	 * Returns the angle between the vectors v1 and v2 in the range 0.0 through
+	 * pi (as defined by the Math.acos function).
 	 */
 	public static double angle(ThreeVector v1, ThreeVector v2) {
 		double m1 = v1.magnitude();
