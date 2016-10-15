@@ -1,56 +1,90 @@
 package module2;
 
+/**
+ * Class that simulates a point particle falling through a viscous medium on Earth's surface
+ */
 public class FallingParticle {
 
-	private double m;
-	private double z;
-	private double v;
-	private long t;
+	/** Acceleration due to gravity on Earth's surface*/
+	public static final double g = 9.8;
+
+	/** Mass of falling particle (unchangeable) */
+	public final double m;
 	
-	public static double d = 1.0;
-	public static double g = 9.8;
+	/** Drag coefficient of the particle (unchangeable) */
+	public final double d;
 
-	public FallingParticle(double m, double d, double z, double v) { 
-		this.m = m;
-		this.d = d;
-		this.z = z;
-		this.v = v;
+	/** Vertical position of the particle, measured upwards from the base of the vessel */
+	private double z;
+
+	/** Velocity of the particle measured upwards */
+	private double v;
+
+	/** Time in seconds since the particle was dropped */
+	private double t;
+
+	/** Construct a falling particle and set it's mass and drag coefficient */
+	public FallingParticle(double mass, double drag) { 
+		if (mass == 0.0) {
+			// TODO throw?
+		}
+		this.m = mass;
+		this.d = drag;
 	}
 
-	public void setM(double m) {
-		this.m = m;
-	}
-
-	public double getM() {	
-		return m;
-	}
-
-	public void setD(double d) {
-		this.d = d;
-	}
-
-	public double getD() {	
-		return d;
-	}
-
+	/** Set the vertical position of the particle */
 	public void setZ(double z) {
 		this.z = z;
 	}
 
-	public double getZ() {	
+	/** Get the vertical position of the particle */
+	public double getZ() {
 		return z;
 	}
 
+	/** Set the vertical velocity of the particle */
 	public void setV(double v) {
 		this.v = v;
 	}
 
-	public double getV() {	
+	/** Get the vertical velocity of the particle */
+	public double getV() {
 		return v;
 	}
 
-	public double getT() {	
+	/** Reset the time elapsed since the particle was dropped */
+	public void reset(double z, double v) {
+		this.z = z;
+		this.v = v;
+		this.t = 0.0;
+	}
+
+	/** Get the time elapsed since the particle was dropped */
+	public double getT() {
 		return t;
+	}
+
+	/** Simulate particle falling for a small time deltaT.
+	 * Where the acceleration is proportional to the square of the velocity.
+	 * For the time period deltaT:
+	 *  - the calculation of the acceleration assumes constant velocity
+	 *  - the calculation of the velocity and distance assumes constant acceleration
+	 */
+	public void doTimeStep(double dt) {
+		double a = (d*v*v/m) - g;
+		v += a*dt;
+		z += v*dt + a*dt*dt/2.0;
+		t += dt;
+	}
+	
+	public void drop(double deltaT) {
+		while (z > 0.0) {
+			doTimeStep(deltaT);
+		}
+	}
+
+	public String toString() {
+		return String.format("m=%1$.2f, d=%2$.2f, z=%3$.5f, v=%4$.4f, t=%5$.4f", m, d, z, v, t);
 	}
 
 }
