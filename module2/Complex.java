@@ -12,16 +12,16 @@ public class Complex {
 	/**
 	 * Constants for the values: 1, 0, i.
 	 */
-	public final static Complex ONE = new Complex(1,0);
-	public final static Complex ZERO = new Complex(0,0);
-	public final static Complex I = new Complex(0,1);
+	public final static Complex ONE  = new Complex(1.0, 0.0);
+	public final static Complex ZERO = new Complex(0.0, 0.0);
+	public final static Complex I    = new Complex(0.0, 1.0);
 
 	/**
 	 * Default constructor, creates an object equal to ZERO.
 	 */
 	public Complex() {
-		real = 0;
-		imag = 0;
+		real = 0.0;
+		imag = 0.0;
 	}
 
 	/**
@@ -74,8 +74,7 @@ public class Complex {
 	}
 
 	public String toString() {
-		return String.format("(%1$.2f + %2$.2fi)",
-				this.real, this.imag);
+		return String.format("(%1$.2f + %2$.2fi)", this.real, this.imag);
 	}
 
 	/**
@@ -107,26 +106,7 @@ public class Complex {
 		double imag = z1.real*z2.imag + z1.imag*z2.real;
 		return new Complex(real, imag);
 	}
-
-	/**
-	 * Returns the result of dividing z1 by z2.
-	 *
-	 * For z1 = a + b i,
-	 *     z2 = c + d i.
-	 *
-	 * Computes and returns:
-	 *  (a.c + b.d) + i(b.c - a.d)
-	 *  --------------------------
-	 *          c^2 + d^2
-	 *
-	 */
-	public static Complex divide2(Complex z1, Complex z2) {
-		double denom = z2.real*z2.real + z2.imag*z2.imag;
-		double real = z1.real*z2.real + z1.imag*z2.imag;
-		double imag = z1.imag*z2.real + z1.real*z2.imag;
-		return new Complex(real/denom, imag/denom);
-	}
-
+	
 	/**
 	 * Returns the result of dividing z1 by z2.
 	 * Multiplies the numerator and denominator by the complex conjugate of
@@ -143,5 +123,23 @@ public class Complex {
 		return numer;
 	}
 
+	/**
+	 * Returns the result of dividing z1 by z2 using the method described bellow
+	 *
+	 * For z1 = a + b i,
+	 *     z2 = c + d i.
+	 *
+	 * Computes and returns:
+	 *  (a.c + b.d) + i(b.c - a.d)
+	 *  --------------------------
+	 *          c^2 + d^2
+	 *
+	 */
+	public static Complex divide2(Complex z1, Complex z2) {
+		double denom = z2.real*z2.real + z2.imag*z2.imag;
+		double real  = z1.real*z2.real + z1.imag*z2.imag;
+		double imag  = z1.imag*z2.real + z1.real*z2.imag;
+		return new Complex(real/denom, imag/denom);
+	}
 
 }

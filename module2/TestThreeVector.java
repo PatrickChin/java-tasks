@@ -8,9 +8,9 @@ import module2.ThreeVector;
 public class TestThreeVector {
 
 	public static void main(String[] args) {
-		ThreeVector v1 = new ThreeVector(5,2,3);
-		ThreeVector v2 = new ThreeVector(4,5,1);
-		ThreeVector v3 = new ThreeVector(0,0,0);
+		ThreeVector v1 = new ThreeVector(5.0, 2.0, 3.0);
+		ThreeVector v2 = new ThreeVector(4.0, 5.0, 1.0);
+		ThreeVector v3 = new ThreeVector(0.0, 0.0, 0.0);
 
 		System.out.println("Initial ThreeVectors: ");
 		System.out.println("\tv1: "+v1);

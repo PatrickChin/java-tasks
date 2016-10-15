@@ -11,9 +11,9 @@ public class ThreeVector {
 	 * Constructs and initalises a ThreeVector to (0,0,0)
 	 */
 	public ThreeVector() {
-		x = 0;
-		y = 0;
-		z = 0;
+		x = 0.0;
+		y = 0.0;
+		z = 0.0;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ThreeVector {
 	 */
 	public ThreeVector unitVector() {
 		double mag = magnitude();
-		if (mag == 0) {
+		if (mag == 0.0) {
 			return new ThreeVector();
 		}
 		return new ThreeVector(x/mag, y/mag, z/mag);

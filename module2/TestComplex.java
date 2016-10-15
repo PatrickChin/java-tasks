@@ -8,8 +8,8 @@ import module2.Complex;
 public class TestComplex {
 
 	public static void main(String[] args) {
-		Complex c1 = new Complex(2, -1);
-		Complex c2 = new Complex(-1, 2);
+		Complex c1 = new Complex(2.0, -1.0);
+		Complex c2 = new Complex(-1.0, 2.0);
 
 		System.out.println("Initial Complex numbers: ");
 		System.out.println("\tc1 = "+c1);
