@@ -26,7 +26,7 @@ public class FallingParticle {
 	/** Construct a falling particle and set it's mass and drag coefficient */
 	public FallingParticle(double mass, double drag) { 
 		if (mass == 0.0) {
-			// TODO throw?
+			// TODO throw an exception?
 		}
 		this.m = mass;
 		this.d = drag;
@@ -53,6 +53,7 @@ public class FallingParticle {
 	}
 
 	/** Reset the time elapsed since the particle was dropped */
+	// Prefer this to setZ and setV
 	public void reset(double z, double v) {
 		this.z = z;
 		this.v = v;
@@ -65,7 +66,7 @@ public class FallingParticle {
 	}
 
 	/** Simulate particle falling for a small time deltaT.
-	 * Where the acceleration is proportional to the square of the velocity.
+	 * Where the drag is proportional to the square of the velocity.
 	 * For the time period deltaT:
 	 *  - the calculation of the acceleration assumes constant velocity
 	 *  - the calculation of the velocity and distance assumes constant acceleration
@@ -77,9 +78,13 @@ public class FallingParticle {
 		t += dt;
 	}
 	
-	public void drop(double deltaT) {
+	/** Start the simulation of dropping this particle from a height of
+	 * z in time steps of dt and return after the particle has hit the 
+	 * ground.
+	 */
+	public void drop(double dt) {
 		while (z > 0.0) {
-			doTimeStep(deltaT);
+			doTimeStep(dt);
 		}
 	}
 
