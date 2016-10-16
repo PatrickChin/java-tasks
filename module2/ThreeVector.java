@@ -1,33 +1,28 @@
 package module2;
 
 /**
- *  A 3-element vector represented by double-precision floating point x,y,z coordinates.
+ *  A 3-element vector represented by double-precision floating point x,y,z
+ *  coordinates.
  */
 public class ThreeVector {
 
 	double x, y, z;
 
-	/**
-	 * Constructs and initalises a ThreeVector to (0,0,0)
-	 */
+	/** Constructs and initialises a ThreeVector to (0,0,0) */
 	public ThreeVector() {
 		x = 0.0;
 		y = 0.0;
 		z = 0.0;
 	}
 
-	/**
-	 * Constructs and initalises a ThreeVector to the same values as v.
-	 */
+	/** Constructs and initialises a ThreeVector to the same values as v.  */
 	public ThreeVector(ThreeVector v) {
 		x = v.x;
 		y = v.y;
 		z = v.z;
 	}
 
-	/**
-	 * Constructs and initalises a ThreeVector to (x,y,z).
-	 */
+	/** Constructs and initialises a ThreeVector to (x,y,z).  */
 	public ThreeVector(double x, double  y, double  z) {
 		this.x = x;
 		this.y = y;
@@ -42,30 +37,22 @@ public class ThreeVector {
 		return Math.sqrt(x*x + y*y + z*z);
 	}
 
-	/**
-	 * Returns the element-wise sum of this vector and vector v.
-	 */
+	/** Returns the element-wise sum of this vector and vector v.  */
 	public ThreeVector add(ThreeVector v) {
 		return new ThreeVector(x+v.x, y+v.y, z+v.z);
 	}
 
-	/**
-	 * Returns the angle between this and the vector v.
-	 */
+	/** Returns the angle between this and the vector v.  */
 	public double angle(ThreeVector v) {
 		return angle(this, v);
 	}
 
-	/**
-	 * Returns the scalar product between this and the vector v.
-	 */
+	/** Returns the scalar product between this and the vector v.  */
 	public double scalarProduct(ThreeVector v) {
 		return scalarProduct(this, v);
 	}
 
-	/**
-	 * Returns the vector product between this and the vector v.
-	 */
+	/** Returns the vector product between this and the vector v.  */
 	public ThreeVector vectorProduct(ThreeVector v) {
 		return vectorProduct(this, v);
 	}
@@ -113,7 +100,7 @@ public class ThreeVector {
 		return Math.acos(d / (m1 * m2));
 	}
 
-	public String toString() {
+	public String toString2() {
 		return String.format("[%1$.2f, %2$.2f, %3$.2f]",
 				this.x, this.y, this.z);
 	}

@@ -6,19 +6,16 @@ package module2;
  */
 public class Complex {
 
+	/** Real and imaginary parts to the complex number */
 	public double real;
 	public double imag;
 
-	/**
-	 * Constants for the values: 1, 0, i.
-	 */
+	/** Constants for the values: 1, 0, i.  */
 	public final static Complex ONE  = new Complex(1.0, 0.0);
 	public final static Complex ZERO = new Complex(0.0, 0.0);
 	public final static Complex I    = new Complex(0.0, 1.0);
 
-	/**
-	 * Default constructor, creates an object equal to ZERO.
-	 */
+	/** Default constructor, creates an object equal to ZERO.  */
 	public Complex() {
 		real = 0.0;
 		imag = 0.0;
@@ -33,17 +30,13 @@ public class Complex {
 		imag = z.imag;
 	}
 
-	/**
-	 * Creates a Complex object with real and imaginary parts.
-	 */
+	/** Creates a Complex object with real and imaginary parts.  */
 	public Complex(double real, double imag) { 
 		this.real = real;
 		this.imag = imag;
 	}
 
-	/**
-	 * Returns the modulus of the complex number.
-	 */
+	/** Returns the modulus of the complex number.  */
 	public double modulus() {
 		return Math.sqrt(real*real + imag*imag);
 	}
@@ -77,30 +70,22 @@ public class Complex {
 		return String.format("(%1$.2f + %2$.2fi)", this.real, this.imag);
 	}
 
-	/**
-	 * Returns a Complex number with a magnitude of mag and a phase of ang
-	 */
-	public Complex setFromModulusAngle(double mag, double ang) {
+	/** Returns a Complex number with a magnitude of mag and a phase of ang */
+	public static Complex setFromModulusAngle(double mag, double ang) {
 		return new Complex(mag*Math.cos(ang), mag*Math.sin(ang));
 	}
 
-	/**
-	 * Computes and returns the sum two complex numbers.
-	 */
+	/** Computes and returns the sum two complex numbers.  */
 	public static Complex add(Complex z1, Complex z2) {
 		return new Complex(z1.real + z2.real, z1.imag + z2.imag);
 	}
 
-	/**
-	 * Returns the result of subtracting z2 from z1.
-	 */
+	/** Returns the result of subtracting z2 from z1.  */
 	public static Complex subtract(Complex z1, Complex z2) {
 		return new Complex(z1.real - z2.real, z1.imag - z2.imag);
 	}
 
-	/**
-	 * Multiplies its arguments.
-	 */
+	/** Multiplies its arguments.  */
 	public static Complex multiply(Complex z1, Complex z2) {
 		double real = z1.real*z2.real - z1.imag*z2.imag;
 		double imag = z1.real*z2.imag + z1.imag*z2.real;
@@ -124,15 +109,16 @@ public class Complex {
 	}
 
 	/**
-	 * Returns the result of dividing z1 by z2 using the method described bellow
+	 * Alternative method for dividing z1 by z2.
+	 * Method described below
 	 *
 	 * For z1 = a + b i,
 	 *     z2 = c + d i.
 	 *
-	 * Computes and returns:
-	 *  (a.c + b.d) + i(b.c - a.d)
-	 *  --------------------------
-	 *          c^2 + d^2
+	 * It can be shown that:
+	 *   z1      (a.c + b.d) + i(b.c - a.d)
+	 *  ----  =  --------------------------
+	 *   z2              c^2 + d^2
 	 *
 	 */
 	public static Complex divide2(Complex z1, Complex z2) {

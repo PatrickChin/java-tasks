@@ -1,7 +1,8 @@
 package module2;
 
 /**
- * Class that simulates a point particle falling through a viscous medium on Earth's surface
+ * Class that simulates a point particle falling through a viscous medium on
+ * Earth's surface
  */
 public class FallingParticle {
 
@@ -14,7 +15,9 @@ public class FallingParticle {
 	/** Drag coefficient of the particle (unchangeable) */
 	public final double d;
 
-	/** Vertical position of the particle, measured upwards from the base of the vessel */
+	/**
+	 * Vertical position of the particle, measured upwards from the base of the
+	 * vessel */
 	private double z;
 
 	/** Velocity of the particle measured upwards */
@@ -65,7 +68,8 @@ public class FallingParticle {
 		return t;
 	}
 
-	/** Simulate particle falling for a small time deltaT.
+	/**
+	 * Simulate particle falling for a small time deltaT.
 	 * Where the drag is proportional to the square of the velocity.
 	 * For the time period deltaT:
 	 *  - the calculation of the acceleration assumes constant velocity
@@ -78,9 +82,9 @@ public class FallingParticle {
 		t += dt;
 	}
 	
-	/** Start the simulation of dropping this particle from a height of
-	 * z in time steps of dt and return after the particle has hit the 
-	 * ground.
+	/**
+	 * Start the simulation of dropping this particle from a height of z in
+	 * time steps of dt and return after the particle has hit the ground.
 	 */
 	public void drop(double dt) {
 		while (z > 0.0) {
