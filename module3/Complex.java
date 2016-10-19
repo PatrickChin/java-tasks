@@ -107,7 +107,7 @@ public class Complex {
 		// in a real number so we can ignore the imag part.
 		double denom = multiply(z2, conj).real;
 		if (denom == 0.0) {
-			throw new ArithmeticException("");
+			throw new ArithmeticException("Cannot divide by (0 + 0i)");
 		}
 		numer.real /= denom;
 		numer.imag /= denom;
@@ -130,7 +130,7 @@ public class Complex {
 	public static Complex divide2(Complex z1, Complex z2) {
 		double denom = z2.real*z2.real + z2.imag*z2.imag;
 		if (denom == 0.0) {
-			throw new ArithmeticException("Denominator is 0");
+			throw new ArithmeticException("Cannot divide by (0 + 0i)");
 		}
 		double real  = z1.real*z2.real + z1.imag*z2.imag;
 		double imag  = z1.imag*z2.real + z1.real*z2.imag;
