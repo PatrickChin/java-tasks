@@ -8,7 +8,7 @@ public class ThreeVector {
 
 	double x, y, z;
 
-	/** Constructs and initialises a ThreeVector to (0,0,0) */
+	/** Constructs and initialises a ThreeVector to (0,0,0). */
 	public ThreeVector() {
 		x = 0.0;
 		y = 0.0;
@@ -59,7 +59,7 @@ public class ThreeVector {
 
 	/**
 	 * Returns the normalised unit vector in the direction as the vector this.
-	 * If this is a null vector another null vector is returned.
+	 * Throws if called from a null vector.
 	 */
 	public ThreeVector unitVector() {
 		double mag = magnitude();
@@ -69,16 +69,12 @@ public class ThreeVector {
 		return new ThreeVector(x/mag, y/mag, z/mag);
 	}
 
-	/**
-	 * Returns the scalar product between two vectors v1 and v2.
-	 */
+	/** Returns the scalar product between two vectors v1 and v2. */
 	public static double scalarProduct(ThreeVector v1, ThreeVector v2) {
 		return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 	}
 
-	/**
-	 * Returns the vector product between two vectors v1 and v2.
-	 */
+	/** Returns the vector product between two vectors v1 and v2. */
 	public static ThreeVector vectorProduct(ThreeVector v1, ThreeVector v2) {
 		double x = v2.z*v1.y - v2.y*v1.z;
 		double y = v2.x*v1.z - v2.z*v1.x;
@@ -89,6 +85,7 @@ public class ThreeVector {
 	/**
 	 * Returns the angle between the vectors v1 and v2 in the range 0.0 through
 	 * pi (as defined by the Math.acos function).
+	 * Throws if v1 or v2 is a null vector.
 	 */
 	public static double angle(ThreeVector v1, ThreeVector v2) {
 		double m1 = v1.magnitude();

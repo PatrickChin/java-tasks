@@ -51,7 +51,7 @@ public class Complex {
 
 	/**
 	 * Returns the complex number with the same phase as this and a modulus of
-	 * 1.0
+	 * 1.0. Throws exception if magnitude is zero.
 	 */
 	public Complex normalised() {
 		double mag = modulus();
@@ -99,6 +99,7 @@ public class Complex {
 	 * Returns the result of dividing z1 by z2.
 	 * Multiplies the numerator and denominator by the complex conjugate of
 	 * then divides the numerator by the denominator.
+	 * Throws if z2 = 0.
 	 */
 	public static Complex divide(Complex z1, Complex z2) {
 		Complex conj = z2.conjugate();
@@ -126,6 +127,7 @@ public class Complex {
 	 *  ----  =  --------------------------
 	 *   z2              c^2 + d^2
 	 *
+	 * Throws if z2 = 0.
 	 */
 	public static Complex divide2(Complex z1, Complex z2) {
 		double denom = z2.real*z2.real + z2.imag*z2.imag;
