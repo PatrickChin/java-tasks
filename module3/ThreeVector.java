@@ -82,6 +82,11 @@ public class ThreeVector {
 		return new ThreeVector(x, y, z);
 	}
 
+	/** Returns the elementwise sum of the vectors v1 and v2. */
+	public ThreeVector add(ThreeVector v1, ThreeVector v2) {
+		return new ThreeVector(v1.x+v2.x, v1.y+v2.y, v1.z+v2.z);
+	}
+
 	/**
 	 * Returns the angle between the vectors v1 and v2 in the range 0.0 through
 	 * pi (as defined by the Math.acos function).

@@ -41,6 +41,11 @@ public class Complex {
 		return Math.sqrt(real*real + imag*imag);
 	}
 
+	/** Returns the argument of the complex number */
+	public double angle() {
+		return Math.atan2(imag, real);
+	}
+
 	/**
 	 * Returns the complex conjugate of this number by reversing the sign of 
 	 * the imaginary part.
