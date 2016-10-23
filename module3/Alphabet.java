@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class Alphabet {
 
-	/** Global random number generator. */
+	/** Static random number generator. */
 	private static Random rand = new Random();
 	
-	/** Create random value in the range [0-127) and convert it to a character. */
+	/** Create random value in the range [0-127] and convert it to a character. */
 	public static char randomCharacter() {
-		return (char) (rand.nextInt(127));
+		return (char) (rand.nextInt(128));
 	}
 
 	public static void main(String args[]) {
