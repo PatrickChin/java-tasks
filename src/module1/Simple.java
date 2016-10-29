@@ -56,7 +56,7 @@ public class Simple {
 		System.out.println("`Integer.toString` is called (probably?) to append integer to string");
 		System.out.println();
 
-		int j; double d;
+		// int j; double d;
 		// System.out.println(j);
 		// System.out.println(d);
 		System.out.println("Can't use uninitalised variables.");
