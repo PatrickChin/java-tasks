@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * Class providing functions to read from a file on disk or from a url connection
- * and a word counting function.
+ * and count the number of words.
  *
  * The main function tests the word counting function.
  */
@@ -37,14 +37,14 @@ public class WordCounter {
 	 * Returns the number of whitespace separated words in a BufferedReader.
 	 */
 	public static int countWordsInResource(BufferedReader br) {
-		int nlines = 0;
+		int nWords = 0;
 		Scanner sc = new Scanner(br);
 		while (sc.hasNext()) {
 			sc.next(); // step forward to end of next whitespace delimited word
-			nlines++;
+			nWords++;
 		}
 		sc.close();
-		return nlines;
+		return nWords;
 	}
 
 	public static void main(String[] args) {
