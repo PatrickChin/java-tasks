@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.lang.IllegalStateException;
 
 /**
  * Class used to find all digits in a text file or in the contents of a url.
@@ -26,12 +27,8 @@ public class NumericalReader {
 	private double minValue, maxValue, sumOfValues;
 	private int nValues;
 
-	public NumericalReader() {
-		minValue = 0.0;
-		maxValue = 0.0;
-		sumOfValues = 0.0;
-		nValues = 0;
-	}
+	/** Whether or not analyseStart has been called */
+	private boolean started = false;
 
 	/**
 	 * Initialise all internal variables except for the BufferedReader.
@@ -41,20 +38,28 @@ public class NumericalReader {
 		// set filewriter to overwrite file.
 		fileWriter = new FileWriter(outFileStr, false);
 
-		System.out.print("Writing to file: ");
-		System.out.println(outFileStr);
+		System.out.println("Writing to file: " + outFileStr);
 
 		// Resetting stored values
 		minValue = 0.0;
 		maxValue = 0.0;
 		sumOfValues = 0.0;
 		nValues = 0;
+		started = true;
 	}
 
 	/**
 	 * Calls this.analyseData on all lines in bufferedReader
 	 */
 	void analyseAll() throws IOException {
+
+		if (!started) {
+			// Unsure if this if the right exception type to throw here
+			throw new IllegalStateException("`this.analysisStart()` has not been " +
+					"called before calling `this.analyseAll()`\n" +
+					"This is a coding error, please report this bug.");
+		}
+
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
 			analyseData(line);
@@ -75,22 +80,29 @@ public class NumericalReader {
 	 * #.#
 	 * .#
 	 * where # represents one or more digits.
+	 * Numbers can be prepended with a `-` symbol.
 	 */
-	void analyseData(String line) throws IOException {
+	private void analyseData(String line) throws IOException {
 
 		// Ignore comment line
 		if (line.startsWith("x ") || line.startsWith("c ")) {
 			return;
 		}
 
-		// Decimal pattern matcher
-		Matcher m = Pattern.compile("\\d*\\.?\\d+").matcher(line);
-		while (m.find()) {
+		// Scan each word in line
+		Scanner sc = new Scanner(line);
+		while (sc.hasNext()) {
+			String word = sc.next();
+
+			// If not parsable double
+			// Another method could be to use `isParsable` from
+			if (!word.matches("-?\\d*\\.?\\d+")) {
+				continue;
+			}
 
 			// Strings that match the above pattern will not throw a
 			// NumberFormatException when parsed.
-			// Parse string that matched decimal pattern:
-			double d = Double.parseDouble(m.group());
+			double d = Double.parseDouble(word);
 
 			System.out.println("Found number: " + d);
 			fileWriter.append(Double.toString(d) + "\n");
@@ -172,11 +184,27 @@ public class NumericalReader {
 		};
 		final String outFileNames[] = {"numbers1.txt", "numbers2.txt"};
 
-		// Get directory to write output files to
-		String outDirStr = getStringFromKeyboard("Enter directory to save data files to (leave empty for home directory):\n\t");
-		// If no user input directory, write to home directory.
-		if (outDirStr.isEmpty()) {
-			outDirStr = System.getProperty("user.home");
+		String outDirStr;
+
+		while (true) {
+			// Get directory to write output files to
+			outDirStr = getStringFromKeyboard("Enter directory to save data " +
+					"files to (leave empty for home directory):\n\t");
+
+			// If no user input directory, write to home directory.
+			if (outDirStr.isEmpty()) {
+				outDirStr = System.getProperty("user.home");
+				break;
+			}
+
+			File f = new File(outDirStr);
+
+			if (f.exists() && f.isDirectory() && f.canWrite()) {
+				break;
+			}
+
+			System.out.println("Error: \"" + outDirStr + "\" is not a valid " +
+					"directory or you do not have permission to write to this directory.");
 		}
 
 		NumericalReader nr = new NumericalReader();
@@ -199,5 +227,5 @@ public class NumericalReader {
 			System.out.println(e.getMessage());
 		}
 	}
-
 }
+
