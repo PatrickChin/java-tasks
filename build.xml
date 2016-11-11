@@ -1,59 +1,48 @@
 <project basedir="." default="build" name="PHAS3459">
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.8"/>
-    <property name="source" value="1.8"/>
-	<path id="PHAS3459.classpath">
-        <pathelement location="bin"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <include name="**/*.java"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="init" name="build">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <include name="**/*.java"/>
-            <classpath refid="PHAS3459.classpath"/>
-        </javac>
-    </target>
-    <target name="TestComplex">
-        <java classname="module2.TestComplex" failonerror="true" fork="yes">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
-    <target name="ParticleMain">
-        <java classname="module2.ParticleMain" failonerror="true" fork="yes">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
-    <target name="Alphabet">
-        <java classname="module3.Alphabet" failonerror="true" fork="yes">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
-    <target name="TestThreeVector">
-        <java classname="module2.TestThreeVector" failonerror="true" fork="yes">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
-    <target name="WordCounter">
-        <java classname="module4.WordCounter" failonerror="true" fork="yes">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
-    <target name="NumericalReader">
-        <java classname="module4.NumericalReader" failonerror="true" fork="no">
-            <classpath refid="PHAS3459.classpath"/>
-        </java>
-    </target>
+	<property name="src" value="src/"/>
+	<property name="build" value="bin/"/>
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.7"/>
+	<property name="source" value="1.7"/>
+
+	<target name="clean">
+		<delete dir="bin"/>
+	</target>
+
+	<target name="build">
+		<echo message="${ant.project.name}: ${ant.file}"/>
+		<javac srcdir="${src}"
+			   destdir="${build}"
+			   classpath="${build}"
+			   source="${source}"
+			   target="${target}"
+			   includeantruntime="false"
+		/>
+	</target>
+
+	<target name="TestComplex">
+		<java classname="module2.TestComplex" classpath="bin"/>
+	</target>
+	<target name="ParticleMain">
+		<java classname="module2.ParticleMain" classpath="bin"/>
+	</target>
+	<target name="Alphabet">
+		<java classname="module3.Alphabet" classpath="bin"/>
+	</target>
+	<target name="TestThreeVector">
+		<java classname="module2.TestThreeVector" classpath="bin"/>
+	</target>
+	<target name="WordCounter">
+		<java classname="module4.WordCounter" classpath="bin"/>
+	</target>
+	<target name="NumericalReader">
+		<java classname="module4.NumericalReader" classpath="bin"/>
+	</target>
+	<target name="SquareMatrix">
+		<java classname="module5.SquareMatrix" classpath="bin"/>
+	</target>
+	<target name="TestSquareMatrix">
+		<java classname="module5.TestSquareMatrix" classpath="bin"/>
+	</target>
+
 </project>
