@@ -41,10 +41,11 @@ public class NumericalReader {
 		System.out.println("Writing to file: " + outFileStr);
 
 		// Resetting stored values
-		minValue = 0.0;
-		maxValue = 0.0;
+		minValue = Double.POSITIVE_INFINITY;
+		maxValue = Double.NEGATIVE_INFINITY;
 		sumOfValues = 0.0;
 		nValues = 0;
+
 		started = true;
 	}
 
@@ -92,31 +93,22 @@ public class NumericalReader {
 		// Scan each word in line
 		Scanner sc = new Scanner(line);
 		while (sc.hasNext()) {
-			String word = sc.next();
 
-			// If not parsable double
-			// Another method could be to use `isParsable` from
-			if (!word.matches("-?\\d*\\.?\\d+")) {
+			if (!sc.hasNextDouble()) {
+				sc.next();
 				continue;
 			}
 
 			// Strings that match the above pattern will not throw a
 			// NumberFormatException when parsed.
-			double d = Double.parseDouble(word);
+			double d = sc.nextDouble();
 
 			System.out.println("Found number: " + d);
 			fileWriter.append(Double.toString(d) + "\n");
 
-			if (nValues == 0) {
-				// Set min, max and sum values to the first value found.
-				minValue = d;
-				maxValue = d;
-				sumOfValues = d;
-			} else {
-				minValue = Math.min(minValue, d);
-				maxValue = Math.max(maxValue, d);
-				sumOfValues += d;
-			}
+			minValue = Math.min(minValue, d);
+			maxValue = Math.max(maxValue, d);
+			sumOfValues += d;
 			nValues++;
 		}
 	}
@@ -165,7 +157,6 @@ public class NumericalReader {
 		System.out.print(msg);
 		Scanner sc = new Scanner(System.in);
 		String  s = sc.nextLine();
-		sc.close();
 		return s;
 	}
 
@@ -189,7 +180,7 @@ public class NumericalReader {
 		while (true) {
 			// Get directory to write output files to
 			outDirStr = getStringFromKeyboard("Enter directory to save data " +
-					"files to (leave empty for home directory):\n\t");
+					"files to (leave empty for home directory): ");
 
 			// If no user input directory, write to home directory.
 			if (outDirStr.isEmpty()) {
