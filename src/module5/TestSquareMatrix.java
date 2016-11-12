@@ -1,9 +1,13 @@
 package module5;
 
+/**
+ * Class providing a main method to test add, subtract, multiply, unitMatrix
+ * and equals methods provided in the SquareMatrix class.
+ */
 public class TestSquareMatrix {
 
 	public static void main(String[] args) {
-		
+
 		// Creating square matrices for manipulation
 		SquareMatrix a = new SquareMatrix(new double[][]
 										  {{2, 0, -1},

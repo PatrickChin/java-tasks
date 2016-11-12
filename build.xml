@@ -44,5 +44,8 @@
 	<target name="TestSquareMatrix">
 		<java classname="module5.TestSquareMatrix" classpath="bin"/>
 	</target>
+	<target name="DataAnalysis">
+		<java classname="module5.DataAnalysis" classpath="bin"/>
+	</target>
 
 </project>
