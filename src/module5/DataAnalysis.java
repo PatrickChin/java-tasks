@@ -69,19 +69,20 @@ public class DataAnalysis {
 		String url = "http://www.hep.ucl.ac.uk/undergrad/3459/data/module5/module5-xy.txt";
 
 		try {
+			System.out.println("Retrieving data from " + url);
 			ArrayList<DataPoint> urldata = dataFromURL(url);
 
 			Theory f = new Theory(2);
 			Theory g = new Theory(4);
 
+			System.out.println("Calculating goodness of fits...");
 			double chi2_f = goodnessOfFit(f, urldata);
 			double chi2_g = goodnessOfFit(g, urldata);
 
 			System.out.println("For f(x) = x^2, the chi squared value is: "+chi2_f);
 			System.out.println("For f(x) = x^4, the chi squared value is: "+chi2_g);
 
-			System.out.format("f(x) = x^%d is the better fit\n",
-					chi2_f < chi2_g ? 2 : 4);
+			System.out.format("f(x) = x^%d is the better fit\n", chi2_f < chi2_g ? 2 : 4);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
