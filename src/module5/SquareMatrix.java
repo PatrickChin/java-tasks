@@ -37,7 +37,7 @@ public class SquareMatrix {
 	 */
 	public void fill(double[][] elems) {
 		this.size = calcSize(elems);
-		// Initalise zero matrix
+		// Initialise zero matrix
 		this.data = new double[size][size];
 		// Copy each element
 		for (int i = 0; i < size; i++) {
@@ -93,6 +93,9 @@ public class SquareMatrix {
 		return new SquareMatrix(mat);
 	}
 
+	/**
+	 * Computes a hashcode for the matrix.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,6 +105,9 @@ public class SquareMatrix {
 		return result;
 	}
 
+	/**
+	 * Test for the equality of two square matricies.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -204,7 +210,7 @@ public class SquareMatrix {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 
-				// multiply row i of m1 by column of column j of m2 and add to sum
+				// multiply row i of m1 by column of column j of m2
 				for (int k = 0; k < size; k++) {
 					data[i][j] += m1.data[i][k] * m2.data[k][j];
 				}
@@ -218,6 +224,9 @@ public class SquareMatrix {
 		return m;
 	}
 
+	/**
+	 * Get a string representation for this matrix.
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < this.size; i++) {

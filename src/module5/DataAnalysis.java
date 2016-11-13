@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 /**
- * Analyses a url containinst a list of experimenta results where each line
+ * Analyses a url containinst a list of experimental results where each line
  * contains three values in the order: x, y and ey, where x is a parameter set
  * by the experimenter, y is a measurement of a dependent variable, and ey is
  * the measurement error on y. Provides a function, goodnessOfFit, that
