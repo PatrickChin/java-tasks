@@ -12,12 +12,12 @@ public class SquareMatrix {
 	private double[][] data;
 
 	/**
-	 * Initalise SquareMatrix without initalising it's members.
+	 * Initialise SquareMatrix without initialising it's members.
 	 */
 	private SquareMatrix() { }
 
 	/**
-	 * Initalize SquareMatrix using a deep copy of elems.
+	 * Initialize SquareMatrix using a deep copy of elems.
 	 */
 	public SquareMatrix(double[][] elems) {
 		this.fill(elems);
@@ -83,7 +83,7 @@ public class SquareMatrix {
 			throw new IllegalArgumentException("Cannot have a matrix size less than zero.");
 		}
 		
-		// Each element of this array is initalized to zero
+		// Each element of this array is initialized to zero
 		// as stated by the language spec
 		double[][] mat = new double[size][size];
 		for (int i = 0; i < size; i++) {
@@ -140,7 +140,7 @@ public class SquareMatrix {
 		}
 
 		int size = m1.size;
-		// Zero initalise array
+		// Zero initialise array
 		double[][] data = new double[size][size];
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -148,7 +148,7 @@ public class SquareMatrix {
 			}
 		}
 
-		// Create a SquareMatrix without initalising it's members
+		// Create a SquareMatrix without initialising it's members
 		SquareMatrix m = new SquareMatrix();
 		// Shallow copy of data as a deep copy is not needed here
 		m.assign(data);
@@ -171,7 +171,7 @@ public class SquareMatrix {
 		}
 
 		int size = m1.size;
-		// Zero initalise array
+		// Zero initialise array
 		double[][] data = new double[size][size];
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -179,7 +179,7 @@ public class SquareMatrix {
 			}
 		}
 
-		// Create a SquareMatrix without initalising it's members
+		// Create a SquareMatrix without initialising it's members
 		SquareMatrix m = new SquareMatrix();
 		// Shallow copy of data as a deep copy is not needed here
 		m.assign(data);
@@ -203,7 +203,7 @@ public class SquareMatrix {
 
 		int size = m1.size;
 
-		// zero initalise data of resultant matrix
+		// zero initialise data of resultant matrix
 		double[][] data = new double[size][size];
 
 		// for each element in the resultant matrix
@@ -217,7 +217,7 @@ public class SquareMatrix {
 			}
 		}
 
-		// Create a SquareMatrix without initalising it's members
+		// Create a SquareMatrix without initialising it's members
 		SquareMatrix m = new SquareMatrix();
 		// Shallow copy of data as a deep copy is not needed here
 		m.assign(data);

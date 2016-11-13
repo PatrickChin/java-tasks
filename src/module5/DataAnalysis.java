@@ -76,7 +76,7 @@ public class DataAnalysis {
 			System.out.println("Retrieving data from " + url);
 			ArrayList<DataPoint> urldata = dataFromURL(url);
 
-			// Initalise functions to try and fit data to
+			// Initialise functions to try and fit data to
 			Theory f = new Theory(2);
 			Theory g = new Theory(4);
 

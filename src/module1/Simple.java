@@ -59,7 +59,7 @@ public class Simple {
 		// int j; double d;
 		// System.out.println(j);
 		// System.out.println(d);
-		System.out.println("Can't use uninitalised variables.");
+		System.out.println("Can't use uninitialised variables.");
 
 		int i = (int) 12.99;
 		System.out.println(i);
