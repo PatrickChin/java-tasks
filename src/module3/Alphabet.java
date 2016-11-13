@@ -14,7 +14,7 @@ public class Alphabet {
 
 	public static void main(String args[]) {
 
-		// Initalize StringBuilder with capacity of 400
+		// Initialize StringBuilder with capacity of 400
 		StringBuilder sb = new StringBuilder(400);
 
 		// Sum of all the numbers in the random sting

@@ -38,7 +38,7 @@ public class TestExceptions {
 			System.err.println();
 		}
 
-		System.out.println("Test:  Initalising the mass of a particle to a negative number: ");
+		System.out.println("Test:  Initialising the mass of a particle to a negative number: ");
 		try {
 			new FallingParticle(-1.0, 1.0);
 		} catch (ArithmeticException e) {
