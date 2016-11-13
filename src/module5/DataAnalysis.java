@@ -1,16 +1,18 @@
 package module5;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-
 /**
+ * Analyses a url containinst a list of experimenta results where each line
+ * contains three values in the order: x, y and ey, where x is a parameter set
+ * by the experimenter, y is a measurement of a dependent variable, and ey is
+ * the measurement error on y. Provides a function, goodnessOfFit, that
+ * calculated the chi squared value from fitting a theoretical function to the
+ * given data.
  */
 public class DataAnalysis {
 
@@ -50,6 +52,8 @@ public class DataAnalysis {
 	public static double goodnessOfFit(Theory f, ArrayList<DataPoint> arr) {
 		int size = arr.size();
 		double chi2 = 0;
+
+		// sum the chi squared contributions of each data point
 		for (int i = 0; i < size; i++) {
 			DataPoint p = arr.get(i);
 			double x = p.getX();
@@ -72,9 +76,11 @@ public class DataAnalysis {
 			System.out.println("Retrieving data from " + url);
 			ArrayList<DataPoint> urldata = dataFromURL(url);
 
+			// Initalise functions to try and fit data to
 			Theory f = new Theory(2);
 			Theory g = new Theory(4);
 
+			// Calculate chi squared values for each fit function
 			System.out.println("Calculating goodness of fits...");
 			double chi2_f = goodnessOfFit(f, urldata);
 			double chi2_g = goodnessOfFit(g, urldata);
@@ -82,6 +88,7 @@ public class DataAnalysis {
 			System.out.println("For f(x) = x^2, the chi squared value is: "+chi2_f);
 			System.out.println("For f(x) = x^4, the chi squared value is: "+chi2_g);
 
+			// Print out which is the best fit i.e. the function with the lowe chi squared value
 			System.out.format("f(x) = x^%d is the better fit\n", chi2_f < chi2_g ? 2 : 4);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());

@@ -14,7 +14,7 @@ public class Theory {
 	}
 
 	/**
-	 * returns f(x)
+	 * returns the value f(x)
 	 */
 	public double y(double x) {
 		return Math.pow(x, this.n);
