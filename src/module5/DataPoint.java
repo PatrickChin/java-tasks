@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * A simple class representing a measurement y along with it's error ey that
- * depends on variable x. These are sored privately and can be accessed via get
+ * depends on variable x. These are stored privately and can be accessed via get
  * methods.
  */
 public class DataPoint {
@@ -41,6 +41,7 @@ public class DataPoint {
 		double x = sc.nextDouble();
 		double y = sc.nextDouble();
 		double ey = sc.nextDouble();
+		sc.close();
 		return new DataPoint(x, y, ey);
 	}
 

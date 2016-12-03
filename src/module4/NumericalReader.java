@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.lang.IllegalStateException;
 
 /**
@@ -111,6 +109,7 @@ public class NumericalReader {
 			sumOfValues += d;
 			nValues++;
 		}
+		sc.close();
 	}
 
 	/**
@@ -151,12 +150,13 @@ public class NumericalReader {
 	}
 
 	/**
-	 * Prints msg and reads and returns a single line of trxt from the console.
+	 * Prints msg and reads and returns a single line of text from the console.
 	 */
 	public static String getStringFromKeyboard(String msg) {
 		System.out.print(msg);
 		Scanner sc = new Scanner(System.in);
 		String  s = sc.nextLine();
+		sc.close();
 		return s;
 	}
 

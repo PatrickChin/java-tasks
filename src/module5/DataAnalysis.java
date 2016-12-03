@@ -1,13 +1,13 @@
 package module5;
 
-import java.net.URL;
 import java.io.IOException;
-import java.util.Scanner;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
- * Analyses a url containinst a list of experimental results where each line
+ * Analyses a URL containing a list of experimental results where each line
  * contains three values in the order: x, y and ey, where x is a parameter set
  * by the experimenter, y is a measurement of a dependent variable, and ey is
  * the measurement error on y. Provides a function, goodnessOfFit, that
@@ -17,7 +17,7 @@ import java.util.InputMismatchException;
 public class DataAnalysis {
 
 	/**
-	 * Reads the response from the input url, and
+	 * Reads the response from the input URL, and
 	 * parses each line into a new DataPoint object, returning
 	 * an ArrayList of each parsed DataPoint
 	 */
@@ -42,6 +42,7 @@ public class DataAnalysis {
 				System.err.println("A line from the url could not be parsed. Skipping.");
 			}
 		}
+		sc.close();
 		return arr;
 	}
 
@@ -88,7 +89,7 @@ public class DataAnalysis {
 			System.out.println("For f(x) = x^2, the chi squared value is: "+chi2_f);
 			System.out.println("For f(x) = x^4, the chi squared value is: "+chi2_g);
 
-			// Print out which is the best fit i.e. the function with the lowe chi squared value
+			// Print out which is the best fit i.e. the function with the lowest chi squared value
 			System.out.format("f(x) = x^%d is the better fit\n", chi2_f < chi2_g ? 2 : 4);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());

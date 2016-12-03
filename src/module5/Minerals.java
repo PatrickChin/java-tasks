@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Analyses two urls, one containing a list of mineral samples with a code number
+ * Analyses two URLs, one containing a list of mineral samples with a code number
  * and mass for each sample and another containing the code number and location of origin.
- * analyseMaps finds the ssamples with the largest   and smallest mass, and for each, prints
+ * analyseMaps finds the samples with the largest   and smallest mass, and for each, prints
  * out:
  *  - the code number
  *  - the mass
@@ -18,9 +18,9 @@ import java.util.Map;
  */
 public class Minerals {
 
-	/** HashMaps containint data about the origin of the material */
+	/** HashMaps containing data about the origin of the material */
 	private HashMap<Integer,String> locationMap;
-	/** HashMaps containint data about the mass of the material */
+	/** HashMaps containing data about the mass of the material */
 	private HashMap<Integer,Double> massMap;
 
 	/** Variable for finding the lightest element */
@@ -66,7 +66,9 @@ public class Minerals {
 				System.err.println("Line number " + lineNum + " from the url:\n\t" +
 						url + "\ncould not be parsed. Skipping.");
 			}
+			lineScanner.close();
 		}
+		sc.close();
 	}
 
 	/**
@@ -92,13 +94,14 @@ public class Minerals {
 				System.err.println("Line number " + lineNum + " from the url:\n\t" +
 						url + "\ncould not be parsed. Skipping.");
 			}
+			lineScanner.close();
 		}
-
+		sc.close();
 	}
 
 
 	/**
-	 * Itterates through each entry in the hash map of masses and finds
+	 * Iterates through each entry in the hash map of masses and finds
 	 * and stores the key, the value and the location of origin for the
 	 * lightest and heaviest elements.
 	 */
@@ -141,11 +144,11 @@ public class Minerals {
 		String locationDataURL = "http://www.hep.ucl.ac.uk/undergrad/3459/data/module5/module5-locations.txt";
 
 		try {
-			// Initiallise and analyse the data in the in the URLs
+			// Initialise and analyse the data in the in the URLs
 			Minerals mineralAnalysis = new Minerals(massDataURL, locationDataURL);
 			mineralAnalysis.printResults();
 		} catch (IOException e) {
-			// Failed to read from url
+			// Failed to read from URL
 			System.err.println(e.getMessage());
 		}
 	}
