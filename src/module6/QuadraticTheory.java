@@ -17,7 +17,7 @@ public class QuadraticTheory implements Theory {
 
 	@Override
 	public String toString() {
-		return String.format("%fx^2 + %fx + %f", a, b, c);
+		return a+"x^2 + " + b + "x + " + c;
 	}
 
 }
