@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 /**
  * A simple class representing a measurement y along with it's error ey that
- * depends on variable x. These are stored privately and can be accessed via get
- * methods.
+ * depends on variable x. These are stored privately and can be accessed via
+ * get methods.
  */
 public class DataPoint {
 

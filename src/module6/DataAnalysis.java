@@ -17,8 +17,9 @@ import java.util.Collection;
 public class DataAnalysis {
 
 	/**
-	 * Performs a goodness of fit calculation, provided by the gofCalculator object,
-	 * to find the theory the best fits the data and returns that theory object.
+	 * Performs a goodness of fit calculation, provided by the gofCalculator
+	 * object, to find the theory the best fits the data and returns that
+	 * theory object.
 	 * @param data collection of data points to which the function is fit
 	 * @param theories list of functions/theories to fit the data to
 	 * @param gofCalculator object that provides the method that describes how
@@ -27,10 +28,11 @@ public class DataAnalysis {
 	 */
 	private static Theory bestTheory(Collection<DataPoint> data,
 			Collection<Theory> theories, GoodnessOfFitCalculator gofCalculator) {
-		double bestGoodnessOfFit = Double.MAX_VALUE;
+		double bestGoodnessOfFit = Double.POSITIVE_INFINITY;
 		Theory bestTheory = null;
 		for (Theory theory : theories) {
 			double gof = gofCalculator.goodnessOfFit(data, theory);
+			System.out.println("Function: `" + theory + "` gives a goodness of git value of " + gof);
 			if (gof < bestGoodnessOfFit) {
 				bestTheory = theory;
 				bestGoodnessOfFit = gof;
@@ -41,7 +43,7 @@ public class DataAnalysis {
 
 	public static void main(String[] args) throws MalformedURLException, IOException {
 		// url that contains the data to be fit
-		String url = "http://www.hep.ucl.ac.uk/undergrad/3459/data/module6/module6-data.txt";
+		final String url = "http://www.hep.ucl.ac.uk/undergrad/3459/data/module6/module6-data.txt";
 
 		System.out.println("Loading data points and labeled data points from: ");
 		System.out.println("    "+url);
@@ -55,16 +57,13 @@ public class DataAnalysis {
 			new QuadraticTheory(1, 10, 0),
 		};
 
-		System.out.println("Testing the goodness of fit for the following functions: ");
-		for (Theory t : theories) {
-			System.out.println(t);
-		}
-		System.out.println();
+		System.out.println("\nTesting the goodness of fit for the following " +
+				"functions using the chi squared methods: ");
 
 		// find which theory object best fits the data using the chi squared method
 		// for calculating the goodness of fit
 		Theory bestT = bestTheory(data, Arrays.asList(theories), new ChiSquared());
-		System.out.println("The function that best fit the data is: " + bestT);
+		System.out.println("\nThe function that best fit the data is: " + bestT);
 	}
 
 }

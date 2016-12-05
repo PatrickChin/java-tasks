@@ -50,5 +50,11 @@
 	<target name="Minerals">
 		<java classname="module5.Minerals" classpath="bin"/>
 	</target>
+	<target name="DataAnalysis2">
+		<java classname="module6.DataAnalysis" classpath="bin"/>
+	</target>
+	<target name="TestDataPoints">
+		<java classname="module6.TestDataPoints" classpath="bin"/>
+	</target>
 
 </project>
