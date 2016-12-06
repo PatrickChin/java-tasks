@@ -3,8 +3,8 @@ package module6;
 import java.util.Scanner;
 
 /**
- * Extension of DataPoint class that also contains a label
- * in the form of a string.
+ * Extension of DataPoint class that also contains a label in the form of a
+ * string.
  */
 public class LabelledDataPoint extends DataPoint {
 	

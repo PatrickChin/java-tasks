@@ -16,9 +16,9 @@ import java.util.Scanner;
 public class TestDataPoints {
 	
 	/**
-	 * Reads the response from the url line by line, parsing
-	 * each line into a DataPoint object or LabelledDataPoint object
-	 * which is added to an ArrayList which is then returned.
+	 * Reads the response from the url line by line, parsing each line into a
+	 * DataPoint object or LabelledDataPoint object which is added to an
+	 * ArrayList which is then returned.
 	 */
 	public static ArrayList<DataPoint> dataFromURL(String url)
 		throws MalformedURLException, IOException {

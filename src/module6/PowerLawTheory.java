@@ -3,10 +3,9 @@ package module6;
 /**
  * Class that represents the mathematical equation:
  *     f(x) = x^n
- * where n is a function parameter.
- * This class implements the Theory interface meaning
- * it provides the function y(x) that returns the value
- * of y at the point x.
+ * where n is a function parameter.  This class implements the Theory interface
+ * meaning it provides the function y(x) that returns the value of y at the
+ * point x.
  */
 public class PowerLawTheory implements Theory {
 

@@ -11,12 +11,12 @@ public class ChiSquared implements GoodnessOfFitCalculator {
 
 	/**
 	 * Calculates and returns a chi squared value determining how well the
-	 * function represented by the Theory object fits the collection of 
-	 * data points.
+	 * function represented by the Theory object fits the collection of data
+	 * points.
 	 * @param data collection of data points that provide the x and y
-	 *     coordinates as well as the error on the y measurement
+	 *        coordinates as well as the error on the y measurement
 	 * @param theory object providing the y(x) method that represents the
-	 *     function to be fit to the data
+	 *        function to be fit to the data
 	 * @return the chi squared value
 	 */
 	@Override

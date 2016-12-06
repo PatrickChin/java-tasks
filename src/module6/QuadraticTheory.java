@@ -3,9 +3,9 @@ package module6;
 /**
  * Class that represents the mathematical equation:
  *     f(x) = ax^2 + bx + c
- * where a, b and c are function parameters defined on construction.
- * This class implements the Theory interface meaning it provides the function
- * y(x) that returns the value of y at the point x.
+ * where a, b and c are function parameters defined on construction.  This
+ * class implements the Theory interface meaning it provides the function y(x)
+ * that returns the value of y at the point x.
  */
 public class QuadraticTheory implements Theory {
 

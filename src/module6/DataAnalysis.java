@@ -23,7 +23,7 @@ public class DataAnalysis {
 	 * @param data collection of data points to which the function is fit
 	 * @param theories list of functions/theories to fit the data to
 	 * @param gofCalculator object that provides the method that describes how
-	 * well a theory fits the data
+	 *        well a theory fits the data
 	 * @return the theory object that best fits the data according
 	 */
 	private static Theory bestTheory(Collection<DataPoint> data,
