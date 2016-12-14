@@ -56,5 +56,13 @@
 	<target name="TestDataPoints">
 		<java classname="module6.TestDataPoints" classpath="bin"/>
 	</target>
-
+	<target name="CountdownTask">
+		<java classname="module8.CountdownTask" classpath="bin"/>
+	</target>
+	<target name="ThreadsMain">
+		<java classname="module8.ThreadsMain" classpath="bin"/>
+	</target>
+	<target name="MonteCarloPiCalculatorTask">
+		<java classname="module8.MonteCarloPiCalculatorTask" classpath="bin"/>
+	</target>
 </project>
