@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class SolarSystem {
 
-    // public final static double G = 1; // gravitational constant
     public final static double G = 6.67408e-11; // gravitational constant / m^3 kg^-1 s^-2
-
-    /** default value set to a year every minute, set to 1 for real-time */
-    double timeScale = (60*60*24*365.24) / 60;
-    double spaceScale = 1e-9;
 
     ArrayList<StellarBody> stellarBodies = new ArrayList<>();
 
@@ -17,9 +12,7 @@ public class SolarSystem {
         stellarBodies.add(o);
     }
 
-    public void step(long nsStep) {
-        // double stepTimeSeconds = 1;
-        double stepTimeSeconds = (nsStep * 1e-9) * timeScale;
+    public void step(double stepTimeSeconds) {
         int n = stellarBodies.size();
         for (int i = 0; i < n; i++) {
             StellarBody o1 = stellarBodies.get(i);

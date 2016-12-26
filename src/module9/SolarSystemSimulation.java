@@ -16,6 +16,14 @@ import javax.swing.SwingWorker;
 
 public class SolarSystemSimulation {
 
+    /** default value set to a year every minute, set to 1 for real-time */
+    final double timeScale = (60*60*24*365.24) / 60;
+    final double spaceScale = 1e-9;
+
+    final long tStep = 5_000_000; // ns per update
+    final double stepTimeSeconds = (tStep * 1e-9) * timeScale;
+
+    double simulationTime = 0;
     SolarSystem solarSystem = new SolarSystem();
 
     JFrame frame;
@@ -35,31 +43,8 @@ public class SolarSystemSimulation {
                 .setRadius(6_371_000) // m
                 .setPosition(new ThreeVector(-149.6e9, 0, 0))
                 .setVelocity(new ThreeVector(0, 30_000, 0))
-                //.setVelocity(new ThreeVector(0, 0_000, 0))
                 .setColor(Color.CYAN);
         solarSystem.addBody(earth);
-
-        // StellarBody sun = new StellarBody()
-        //         .setMass(10000) // mass / kg
-        //         .setRadius(100) // radius / m
-        //         .setColor(Color.YELLOW);
-        // solarSystem.addBody(sun);
-
-        // StellarBody mercury = new StellarBody()
-        //         .setMass(10)
-        //         .setRadius(10)
-        //         .setPosition(new ThreeVector(-160, 0, 0))
-        //         .setVelocity(new ThreeVector(0, 6, 0))
-        //         .setColor(Color.RED);
-        // solarSystem.addBody(mercury);
-
-        // StellarBody earth = new StellarBody()
-        //         .setMass(10)
-        //         .setRadius(10)
-        //         .setPosition(new ThreeVector(-300, 0, 0))
-        //         .setVelocity(new ThreeVector(0, 6, 0))
-        //         .setColor(Color.CYAN);
-        // solarSystem.addBody(earth);
 
     }
 
@@ -78,23 +63,24 @@ public class SolarSystemSimulation {
             @Override
             protected Void doInBackground() {
 
-                final long tStep = 16_000_000; // ns
                 long tAccumilator = 0;
                 long tprev = System.nanoTime();
                 for (;;) {
 
                     long tcur = System.nanoTime();
-                    tAccumilator += tcur - tprev;
+                    long dt = tcur - tprev;
+                    tAccumilator += dt;
                     tprev = tcur;
 
                     while (tAccumilator >= tStep) {
-                        solarSystem.step(tStep);
+                        solarSystem.step(stepTimeSeconds);
                         tAccumilator -= tStep;
+                        simulationTime += stepTimeSeconds;
                     }
 
                     panel.repaint();
                     try {
-                        Thread.sleep(5);
+                        Thread.sleep(1);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -122,29 +108,22 @@ public class SolarSystemSimulation {
 
             ThreeVector cOfM = solarSystem.getCentreOfMass();
 
-            int stringoff = 2;
+            int stringoff = 1;
+            // g2.setColor(Color.WHITE);
+            // g2.drawString(cOfM.multiply(spaceScale).toString(), 10, 25);
+            // for (StellarBody o : solarSystem.stellarBodies) {
+            //     g2.setColor(o.getColor());
+            //     g2.drawString(o.getPosition().multiply(spaceScale).toString(),
+            //             10, 25*(stringoff++));
+            // }
             g2.setColor(Color.WHITE);
-            g2.drawString(cOfM.multiply(solarSystem.spaceScale).toString(), 10, 25);
-            for (StellarBody o : solarSystem.stellarBodies) {
-                g2.setColor(o.getColor());
-                g2.drawString(o.getPosition().multiply(solarSystem.spaceScale).toString(),
-                        10, 25*(stringoff++));
-            }
+            g2.drawString("Simulation time: " + ((int) simulationTime/86400) +
+                    " earth days", 10, 25*(stringoff++));
 
             g2.translate(getWidth() / 2.0, getHeight() / 2.0);
-            g2.scale(solarSystem.spaceScale, solarSystem.spaceScale);
-            // g2.translate(-cOfM.getX(), -cOfM.getY());
+            g2.scale(spaceScale, spaceScale);
+            g2.translate(-cOfM.getX(), -cOfM.getY());
 
-            // for (int i = -50; i < 50; i++) {
-            //     for (int j = -50; j < 50; j++) {
-            //         g2.fill(new Rectangle2D.Double(
-            //                     100*i/solarSystem.spaceScale,
-            //                     100*j/solarSystem.spaceScale,
-            //                     10e6, 10e6));
-            //     }
-            // }
-
-            g2.fill(new Ellipse2D.Double(0,0,20/solarSystem.spaceScale, 40/solarSystem.spaceScale));
             for (StellarBody o : solarSystem.stellarBodies) {
                 g2.setColor(o.getColor());
                 double radius = 10e9;
