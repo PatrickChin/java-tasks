@@ -65,4 +65,7 @@
 	<target name="MonteCarloPiCalculatorTask">
 		<java classname="module8.MonteCarloPiCalculatorTask" classpath="bin"/>
 	</target>
+	<target name="SolarSystemSimulation">
+		<java classname="module9.SolarSystemSimulation" classpath="bin"/>
+	</target>
 </project>

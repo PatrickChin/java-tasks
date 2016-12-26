@@ -23,6 +23,18 @@ public class ThreeVector {
 		this.y = y;
 		this.z = z;
 	}
+	
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getZ() {
+		return z;
+	}
 
 	/** Returns the sum of squares of all the vector components.  */
 	public double magnitudeSq() {
@@ -54,6 +66,12 @@ public class ThreeVector {
 		return new ThreeVector(x+v.x, y+v.y, z+v.z);
 	}
 
+	/** Returns the elementwise subtraction of the vectors v from this. */
+	public ThreeVector subtract(ThreeVector v) {
+		return new ThreeVector(x-v.x, y-v.y, z-v.z);
+	}
+
+
 	/** Returns the scalar product between this and the vector v.  */
 	public double dot(ThreeVector v) {
 		return dot(this, v);
@@ -81,13 +99,24 @@ public class ThreeVector {
 		return new ThreeVector(x/mag, y/mag, z/mag);
 	}
 
-	public String toString2() {
+	public String toString() {
 		return String.format("[%1$.2f, %2$.2f, %3$.2f]",
 				this.x, this.y, this.z);
 	}
 
 
 	// Static methods
+
+	/** Returns the elementwise sum of the vectors v1 and v2. */
+	public static ThreeVector add(ThreeVector... vs) {
+        double x = 0, y = 0, z = 0;
+        for (ThreeVector v : vs) {
+            x += v.x;
+            y += v.y;
+            z += v.z;
+        }
+		return new ThreeVector(x, y, z);
+	}
 
 	/** Returns the elementwise sum of the vectors v1 and v2. */
 	public static ThreeVector add(ThreeVector v1, ThreeVector v2) {
