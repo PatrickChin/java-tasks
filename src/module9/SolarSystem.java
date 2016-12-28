@@ -98,6 +98,10 @@ public class SolarSystem {
         return stellarBodies;
     }
 
+    /**
+     * Update the simulation by stepTimeSeconds, calculating the result of the
+     * force of gravity on each pair of stellar bodies.
+     */
     public void step() {
         int n = stellarBodies.size();
         // for (int i = 0; i < n; i++) {

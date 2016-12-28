@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+/**
+ * Class containing a main method that creates and shows the GUI to visualise
+ * and update the simulated solar system.
+ */
 public class SolarSystemSimulation {
 
     /**
@@ -65,17 +69,18 @@ public class SolarSystemSimulation {
             protected Void doInBackground() {
 
                 // Accumilated time since last update
+                // i.e. how far the simulation lags behind real-time
                 long tAccumilator = 0;
                 long tprev = System.nanoTime();
 
                 int stepCounter = 0;
                 int fpsCounter = 0;
-                long fpsTime = tprev + 1_000_000_000;
+                long fpsTime = tprev + 1_000_000_000; // time at which to print fps
 
                 for (;;) {
 
                     long tcur = System.nanoTime();
-                    long dt = tcur - tprev;
+                    long dt = tcur - tprev; // time since last loop
                     tAccumilator += dt;
                     tprev = tcur;
 
@@ -116,8 +121,13 @@ public class SolarSystemSimulation {
         worker.execute(); // Start the background worker thread.
     }
 
+    /**
+     * Class extending JPanel that overrides the paintComponent method to draw
+     * a representation of the solar system simulation to the screen.
+     */
     class SimulationPanel extends JPanel {
 
+        /** Constructor setting the prefered size and colour of the panel */
         SimulationPanel() {
             setPreferredSize(new Dimension(400, 400));
             setBackground(Color.BLACK);
@@ -127,12 +137,11 @@ public class SolarSystemSimulation {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g); // call superclass method first
 
-
+            // needed to access fill(Shape) methods and antialiasing
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                      RenderingHints.VALUE_ANTIALIAS_ON);
 
-            ThreeVector cOfM = solarSystem.getCentreOfMass();
 
             int yoff = 1;
             g2.setColor(Color.WHITE);
@@ -151,14 +160,25 @@ public class SolarSystemSimulation {
             }
 
 
+            // Set the point (0, 0) to the centre of the screen
             g2.translate(getWidth() / 2.0, getHeight() / 2.0);
+
+            // Shrink the size of the solar system to fit in a reasonable scale
             g2.scale(spaceScale, spaceScale);
+
+            // Set the center of the screen to the centre of mass of the system
+            ThreeVector cOfM = solarSystem.getCentreOfMass();
             g2.translate(-cOfM.getX(), -cOfM.getY());
 
             for (StellarBody o : solarSystem.getStellarBodies()) {
                 g2.setColor(o.getColor());
+
+                // assuming getDispRadius is the radius size in pixels,
+                // divide by spaceScale to undo g2.scale(spaceScale)
                 double radius = o.getDispRadius()/spaceScale;
                 g2.fill(new Ellipse2D.Double(
+                         // subtract radius as this function draws an ellipse
+                         // from the top right rather than from the centre
                          o.getPosition().getX() - radius,
                          o.getPosition().getY() - radius,
                          2*radius, 2*radius
@@ -170,6 +190,8 @@ public class SolarSystemSimulation {
 
     public static void main(String[] args)
             throws InterruptedException, InvocationTargetException {
+        
+        // Run the GUI in a separate thread (event dispatch thread)
         SwingUtilities.invokeLater(() ->
             new SolarSystemSimulation()
         );

@@ -26,7 +26,7 @@ public class StellarBody {
         this.color = Color.WHITE;
     }
 
-    // Getters and setters bellow
+    // Getters and setters for all parameters
 
     public String getName() {
         return name;
