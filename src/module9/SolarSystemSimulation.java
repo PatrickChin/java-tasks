@@ -16,39 +16,40 @@ import javax.swing.SwingWorker;
 
 public class SolarSystemSimulation {
 
-    /** default value set to a year every minute, set to 1 for real-time */
-    final double timeScale = (60*60*24*365.24) / 60;
-    final double spaceScale = 1e-9;
+    /**
+     * Ratio between simulation and real time. Default value set to a year
+     * every thirty seconds, set to 1 for real-time.
+     */
+    final double timeScale = (60*60*24*365.24) / 30;
 
-    final long tStep = 5_000_000; // ns per update
+    /**
+     * Ratio between distances in the simulation and pixel distances on the
+     * display. Default value set to an arbitary constant such that the
+     * distance between the sun and the earth is scaled to a few hundred
+     * pixels.
+     */
+    final double spaceScale = 2e-9;
+
+    /** Number of nanoseconds between each step() call */
+    final long tStep = 10_000_000; // ns per update
+    /** Equivalent time in seconds between each step() call in simulation time. */
     final double stepTimeSeconds = (tStep * 1e-9) * timeScale;
 
+    /** Simulation time in seconds */
     double simulationTime = 0;
-    SolarSystem solarSystem = new SolarSystem();
+    /** Object representing the simulated solar system */
+    SolarSystem solarSystem = new SolarSystem(stepTimeSeconds);
 
     JFrame frame;
     JPanel panel;
+
+    /**
+     * Object containing the background thread containing the simulation loop
+     * that updates the solar system and repaints the panel.
+     */
     SwingWorker<Void, Integer> worker;
 
     SolarSystemSimulation() {
-
-        StellarBody sun = new StellarBody()
-                .setMass(1.989e30) // kg
-                .setRadius(695_700_000) // m
-                .setColor(Color.YELLOW);
-        solarSystem.addBody(sun);
-
-        StellarBody earth = new StellarBody()
-                .setMass(5.972e24) // kg
-                .setRadius(6_371_000) // m
-                .setPosition(new ThreeVector(-149.6e9, 0, 0))
-                .setVelocity(new ThreeVector(0, 30_000, 0))
-                .setColor(Color.CYAN);
-        solarSystem.addBody(earth);
-
-    }
-
-    void start() {
 
         frame = new JFrame("Solar System Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,8 +64,14 @@ public class SolarSystemSimulation {
             @Override
             protected Void doInBackground() {
 
+                // Accumilated time since last update
                 long tAccumilator = 0;
                 long tprev = System.nanoTime();
+
+                int stepCounter = 0;
+                int fpsCounter = 0;
+                long fpsTime = tprev + 1_000_000_000;
+
                 for (;;) {
 
                     long tcur = System.nanoTime();
@@ -72,22 +79,41 @@ public class SolarSystemSimulation {
                     tAccumilator += dt;
                     tprev = tcur;
 
-                    while (tAccumilator >= tStep) {
-                        solarSystem.step(stepTimeSeconds);
-                        tAccumilator -= tStep;
-                        simulationTime += stepTimeSeconds;
+                    // Print out fps every second
+                    if (tcur > fpsTime) {
+                        System.out.println("fps: " + fpsCounter);
+                        fpsCounter = 0;
+                        fpsTime += 1_000_000_000;
                     }
 
-                    panel.repaint();
+
+                    // step the simulation the required number of times
+                    while (tAccumilator >= tStep) {
+                        // increment the simulation by stepTimeSeconds
+                        solarSystem.step();
+                        stepCounter++;
+                        tAccumilator -= tStep;
+
+                        // Prefer multiplication to summing as this reduces the
+                        // floating point errors
+                        simulationTime = stepCounter * stepTimeSeconds;
+                        // simulationTime += stepTimeSeconds;
+                    }
+
+                    fpsCounter++;
+                    panel.repaint(); // request the panel to be repainted
+
+                    // This is here so that cpu useage is not 100%
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         };
-        worker.execute();
+        worker.execute(); // Start the background worker thread.
     }
 
     class SimulationPanel extends JPanel {
@@ -108,41 +134,44 @@ public class SolarSystemSimulation {
 
             ThreeVector cOfM = solarSystem.getCentreOfMass();
 
-            int stringoff = 1;
-            // g2.setColor(Color.WHITE);
-            // g2.drawString(cOfM.multiply(spaceScale).toString(), 10, 25);
-            // for (StellarBody o : solarSystem.stellarBodies) {
-            //     g2.setColor(o.getColor());
-            //     g2.drawString(o.getPosition().multiply(spaceScale).toString(),
-            //             10, 25*(stringoff++));
-            // }
+            int yoff = 1;
             g2.setColor(Color.WHITE);
             g2.drawString("Simulation time: " + ((int) simulationTime/86400) +
-                    " earth days", 10, 25*(stringoff++));
+                    " earth days", 10, 25*(yoff++));
+
+            yoff++;
+            for (StellarBody o : solarSystem.getStellarBodies()) {
+                g2.setColor(o.getColor());
+                g2.fill(new Ellipse2D.Double(20, 25*yoff-10, 10, 10));
+                g2.drawString(o.getName(), 40, 25*yoff);
+
+                yoff++;
+                // Ignore all further asteroids
+                if (o.getName() == "Asteroid") break;
+            }
+
 
             g2.translate(getWidth() / 2.0, getHeight() / 2.0);
             g2.scale(spaceScale, spaceScale);
             g2.translate(-cOfM.getX(), -cOfM.getY());
 
-            for (StellarBody o : solarSystem.stellarBodies) {
+            for (StellarBody o : solarSystem.getStellarBodies()) {
                 g2.setColor(o.getColor());
-                double radius = 10e9;
+                double radius = o.getDispRadius()/spaceScale;
                 g2.fill(new Ellipse2D.Double(
                          o.getPosition().getX() - radius,
                          o.getPosition().getY() - radius,
-                         radius, radius
-                         // o.getPosition().getX() - o.getRadius(),
-                         // o.getPosition().getY() - o.getRadius(),
-                         // 2*o.getRadius(), 2*o.getRadius()
+                         2*radius, 2*radius
                 ));
             }
+
         }
     }
 
     public static void main(String[] args)
             throws InterruptedException, InvocationTargetException {
-        SwingUtilities.invokeAndWait(() ->
-            new SolarSystemSimulation().start()
+        SwingUtilities.invokeLater(() ->
+            new SolarSystemSimulation()
         );
     }
 

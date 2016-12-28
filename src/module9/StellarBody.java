@@ -2,79 +2,97 @@ package module9;
 
 import java.awt.Color;
 
+/**
+ * Class representing a named spherical object in space. Can be used to
+ * represent planets, stars and asteroids etc.
+ */
 public class StellarBody {
 
-	private double mass;
-	private double radius;
-	private ThreeVector position;
-	private ThreeVector velocity;
-	private Color color;
+    private String name;
+    private double mass; // kg
+    private double radius; // m
+    private double dispRadius; // pixels
+    private ThreeVector position; // m
+    private ThreeVector velocity; // m/s
+    private Color color;
 
     public StellarBody() {
-		this.mass = 1;
-		this.radius = 1;
-		this.position = ThreeVector.ZERO;
-		this.velocity = ThreeVector.ZERO;
-		this.color = Color.WHITE;
+        this.name = new String();
+        this.mass = 1;
+        this.radius = 1;
+        this.dispRadius = 1;
+        this.position = ThreeVector.ZERO;
+        this.velocity = ThreeVector.ZERO;
+        this.color = Color.WHITE;
     }
-	
-	public StellarBody(double mass, double radius,
-			ThreeVector position, ThreeVector veclocity,
-			Color color) {
-		this.mass = mass;
-		this.radius = radius;
-		this.position = position;
-		this.velocity = veclocity;
-		this.color = color;
-	}
 
-	public double getMass() {
-		return mass;
-	}
+    // Getters and setters bellow
 
-	public StellarBody setMass(double mass) {
-		this.mass = mass;
+    public String getName() {
+        return name;
+    }
+
+    public StellarBody setName(String name) {
+        this.name = name;
         return this;
-	}
+    }
+    
+    public double getMass() {
+        return mass;
+    }
 
-	public double getRadius() {
-		return radius;
-	}
-
-	public StellarBody setRadius(double radius) {
-		this.radius = radius;
+    public StellarBody setMass(double mass) {
+        this.mass = mass;
         return this;
-	}
+    }
 
-	public ThreeVector getPosition() {
-		return position;
-	}
+    public double getDispRadius() {
+        return dispRadius;
+    }
 
-	public StellarBody setPosition(ThreeVector position) {
-		this.position = position;
+    public StellarBody setDispRadius(double dispRadius) {
+        this.dispRadius = dispRadius;
         return this;
-	}
+    }
 
-	public ThreeVector getVelocity() {
-		return velocity;
-	}
+    public double getRadius() {
+        return radius;
+    }
 
-	public StellarBody setVelocity(ThreeVector velocity) {
-		this.velocity = velocity;
+    public StellarBody setRadius(double radius) {
+        this.radius = radius;
         return this;
-	}
+    }
 
-	public Color getColor() {
-		return color;
-	}
+    public ThreeVector getPosition() {
+        return position;
+    }
 
-	public StellarBody setColor(Color color) {
-		this.color = color;
+    public StellarBody setPosition(ThreeVector position) {
+        this.position = position;
         return this;
-	}
+    }
 
-	public String toString() {
-		return "StellarBody: " + position.toString() + " " + radius;
-	}
+    public ThreeVector getVelocity() {
+        return velocity;
+    }
+
+    public StellarBody setVelocity(ThreeVector velocity) {
+        this.velocity = velocity;
+        return this;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public StellarBody setColor(Color color) {
+        this.color = color;
+        return this;
+    }
+
+    public String toString() {
+        return "StellarBody: " + position.toString() + " " + radius;
+    }
 
 }
